@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Template Expanding Directive</title>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+    body {font-size: 1.2em;}
+    .error{
+      color: red;
+    }
+    </style>
+  </head>
+  <body ng-app="ShoppingListDirectiveApp">
+    <h2>Template Expanding Directive</h2>
+    <!-- LIST #1 - unlimited items -->
+    <div id="list1" ng-controller="ShoppingListController1 as list">
+      <h3>Shopping List #1</h3>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.quantity" placeholder="quantity">
+      <button ng-click="list.addItem();"> Add Item To Shopping List</button>
+      <ol>
+        <!-- <list-Item ng-repeat="item in list.items"></list-Item> -->
+        <li list-Item ng-repeat="item in list.items"></li>         <!-- restricting whole element i.e. 'E' from html DOM-->
+      </ol>
+      <div class="error">Error: </div>
+    </div>
+
+    <!-- LIST #2 - (limited to 3 items) -->
+    <div id="list2" ng-controller="ShoppingListController2 as list">
+      <h3>Shopping List #2 (limited to 3 items)</h3>
+      <input type="text" ng-model="list.itemName" placeholder="item name">
+      <input type="text" ng-model="list.quantity" placeholder="quantity">
+      <button ng-click="list.addItem();"> Add Item To Shopping List</button>
+      <ol>
+        <list-item ng-repeat="item in list.items"></list-item>      <!-- restricting attribute ng-repeat i.e. 'A' from html DOM-->
+      </ol>
+      <div class="error">Error: {{list.errorMessage}}</div>
+    </div>
+  </body>
+</html>
